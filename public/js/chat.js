@@ -1,5 +1,5 @@
 window.onload = () => {
-  let socket = new WebSocket('ws://echo.websocket.org')
+  let socket = new WebSocket('ws://localhost:3000/')
 
   let textView = document.getElementById('text-view')
   let buttonSend = document.getElementById('send-button')
@@ -8,6 +8,7 @@ window.onload = () => {
 
   // Events
   socket.onopen = event => {
+    console.log(event)
     console.log('Connection Established')
     label.innerHTML = 'Connection Established'
   }

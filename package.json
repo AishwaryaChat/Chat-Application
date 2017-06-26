@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/AishwaryaChat/Chat-Application/issues"
   },
-  "homepage": "https://github.com/AishwaryaChat/Chat-Application#readme"
+  "homepage": "https://github.com/AishwaryaChat/Chat-Application#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-ws": "^3.0.0",
+    "ws": "^3.0.0"
+  }
 }

@@ -36,8 +36,7 @@ db.once('open', (err) => {
 })
 
 server.get('/', (req, res) => {
-  if (req.session.user_id !== undefined) return res.sendFile(path.join(__dirname, 'public/app.html'))
-  res.sendFile(path.join(__dirname, 'public/assets/html/index.html'))
+  res.sendFile(path.join(__dirname, 'public/app.html'))
 })
 
 server.get('/signin', (req, res) => {
@@ -46,10 +45,6 @@ server.get('/signin', (req, res) => {
 
 server.get('/signup', (req, res) => {
   res.redirect('/home')
-})
-
-server.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/assets/html/home.html'))
 })
 
 chatServer.listen(http, session)

@@ -67,7 +67,7 @@ const checkPassword = (pass, req, res) => {
         if (err) res.send({err})
         if (hash === user.password) {
           req.session.user_id = req.body.emailAddress
-          res.redirect('/home')
+          res.redirect('/#home')
         } else res.send({message: 'not matched'})
       })
     }

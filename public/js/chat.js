@@ -1,54 +1,21 @@
 window.onload = () => {
-  let socket = new WebSocket('ws://localhost:3000/')
+  const socket = io()
 
   let textView = document.getElementById('text-view')
   let buttonSend = document.getElementById('send-button')
-  let buttonStop = document.getElementById('stop-button')
-  let label = document.getElementById('status-label')
+  let box = document.getElementById('messages')
 
-  // Events
-  socket.onopen = event => {
-    console.log(event)
-    console.log('Connection Established')
-    label.innerHTML = 'Connection Established'
-  }
-
-  socket.onmessage = event => {
-    console.log('Data Received')
-    if (typeof event.data === 'string') {
-      label.innerHTML = event.data
+    const sendMessage = () => {
+      socket.emit('message', textView.value)
     }
-  }
+    socket.on('chatMessage', (message) => {
+      const text = message.user + ': ' + message.text
+      let p = document.createElement('p')
+      p.innerHTML = text
+      box.appendChild(p)
+      console.log(box)
+    })
 
-  socket.onclose = event => {
-    console.log('Connection Closed')
-
-    let code = event.code
-    let reason = event.reason
-    let wasClean = event.wasClean
-
-    if (wasClean) {
-      label.innerHTML = 'Connection closed normally'
-    } else {
-      label.innerHTML = 'Connection closed with message' + reason + ` (Code: ${code})`
-    }
-  }
-
-  socket.onerror = event => {
-    console.log('Error occured')
-    label.innerHTML = 'Error: ' + event
-  }
-
-  // Actions
-  buttonSend.onclick = () => {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(textView.value)
-    }
-  }
-
-  buttonStop.onclick = () => {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.close()
-    }
-  }
+    // Actions
+    buttonSend.onclick = sendMessage
 }

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const uuid = require('node-uuid')
 
-const env = require('./config')
+const env = require('./config.json')
 const router = require('./src/routes')
 const chatServer = require('./lib/chatServer')
 const session = require('express-session')({
@@ -36,7 +36,7 @@ db.once('open', (err) => {
 })
 
 server.get('/', (req, res) => {
-  if (req.session.user_id !== undefined) return res.redirect('/home')
+  if (req.session.user_id !== undefined) return res.sendFile(path.join(__dirname, 'public/app.html'))
   res.sendFile(path.join(__dirname, 'public/assets/html/index.html'))
 })
 

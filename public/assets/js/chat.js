@@ -13,7 +13,6 @@ window.onload = () => {
       let p = document.createElement('p')
       p.innerHTML = text
       box.appendChild(p)
-      console.log(box)
     })
 
     // Actions
